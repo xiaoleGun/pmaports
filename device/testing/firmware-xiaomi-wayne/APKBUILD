@@ -1,0 +1,42 @@
+# Maintainer: xiaoleGun <1592501605@qq.com>
+
+pkgname=firmware-xiaomi-wayne
+pkgver=0.1
+pkgrel=0
+pkgdesc="Firmware for Xiaomi 6X"
+url="https://github.com/xiaoleGun/firmware-xiaomi-wayne"
+arch="aarch64"
+depends="linux-firmware-qcom"
+license="proprietary"
+options="!check !strip !archcheck !tracedeps pmb:cross-native"
+
+_commit="107102916006b98a592940949c09d34ee2745389"
+
+source="$pkgname.tar.gz::$url/archive/$_commit.tar.gz
+	firmware.files
+	30-gpu-firmware.files"
+
+subpackages="
+	$pkgname-initramfs:firmware_initramfs"
+
+package() {
+	cd "$srcdir/$pkgname-$_commit/"
+	for i in $(cat "$srcdir"/firmware.files); do
+		install -Dm644 "$i" "$pkgdir/lib/$i"
+	done
+}
+
+firmware_initramfs() {
+	pkgdesc="Files to be included in the initramfs to support osk-sdl"
+	depends="$pkgname"
+	install_if="$pkgname-nonfree-firmware"
+	mkdir "$subpkgdir"
+	install -Dm644 "$srcdir/30-gpu-firmware.files" \
+		"$subpkgdir/etc/postmarketos-mkinitfs/files/30-gpu-firmware.files"
+}
+
+sha512sums="
+2d789ef3ec4b1adc760d3dccbcd3ab37fa2ea57183301ed523f986aef39f13a7e6566642791333cfda26dc68b33019a8512259ef040446af2819a257c03c8540  firmware-xiaomi-wayne.tar.gz
+a75424a7f6c02694d16fd0431d0d79bdc9c64d098a2f69980b62a95ad807c20685e983d9064a0d6623ed046505512330c10d90749cf073f3dbb67935cf70c6d1  firmware.files
+643c3b1c9c76a51ca3a31d1282a24bdab0411575b86f92f7360dc28c5ef28ab3bc7d611bc47c40c272a07c27704e2b977ada967616ee872fc56662192d164a75  30-gpu-firmware.files
+"

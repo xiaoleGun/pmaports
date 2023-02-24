@@ -1,0 +1,33 @@
+# Maintainer: xiaoleGun <1592501605@qq.com>
+
+deviceinfo_format_version="0"
+deviceinfo_name="Xiaomi MI 6X"
+deviceinfo_manufacturer="Xiaomi"
+deviceinfo_codename="xiaomi-wayne"
+deviceinfo_year="2018"
+deviceinfo_modules_initfs=""
+deviceinfo_arch="aarch64"
+
+# Device related
+deviceinfo_gpu_accelerated="true"
+deviceinfo_chassis="handset"
+deviceinfo_keyboard="false"
+deviceinfo_external_storage="false"
+deviceinfo_screen_width="1080"
+deviceinfo_screen_height="2160"
+
+# Bootloader related
+deviceinfo_kernel_cmdline_mainline="PMOS_NO_OUTPUT_REDIRECT"
+deviceinfo_generate_bootimg="true"
+deviceinfo_bootimg_qcdt="false"
+deviceinfo_flash_sparse="true"
+deviceinfo_flash_offset_base="0x00000000"
+deviceinfo_flash_offset_kernel="0x00008000"
+deviceinfo_flash_offset_ramdisk="0x01000000"
+deviceinfo_flash_offset_second="0x00f00000"
+deviceinfo_flash_offset_tags="0x00000100"
+deviceinfo_flash_pagesize="4096"
+
+deviceinfo_dtb="qcom/sdm660-xiaomi-wayne"
+deviceinfo_append_dtb="true"
+deviceinfo_flash_kernel_on_update="true"
